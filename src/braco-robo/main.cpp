@@ -12,7 +12,8 @@ public:
 	
 
 	double x, y, z;
-	double angulo;
+	double angulo = 0.0f;
+	double scale = 1.0f;
 	double corR, corG, corB;
 	int rY;
 	float rYvalue;
@@ -27,12 +28,12 @@ public:
 
 	void rotateLeftY(void) {
 		this->rY = 1;
-		this->rYvalue -= 3.0;
+		this->rYvalue += 3.0;
 	}
 
 	void rotateRightY(void) {
 		this->rY = 1;
-		this->rYvalue += 3.0;
+		this->rYvalue -= 3.0;
 	}
 
 	void display(void) {
@@ -40,6 +41,7 @@ public:
 		glColor3f(this->corR, this->corG, this->corB);
 		glRotatef(this->angulo, 0.0f, 0.0f, 1.0f);
 		glTranslatef(this->x, this->y, 0.0f);
+		glScalef(1.0f, this->scale, 1.0f);
 
 		if (this->rY = 1) {
 			glRotatef(this->rYvalue, 0.0f, 1.0f, 0.0f);
@@ -176,22 +178,19 @@ int main()
 	
 	cubos[0].x = 0.0f;
 	cubos[0].y = -10.0f;
-	cubos[0].angulo = 0.0f;
 	cubos[0].corR = 0.0f; cubos[0].corG = 0.0f; cubos[0].corB = 0.0f;
 
 	cubos[1].x = 0.0f;
 	cubos[1].y = -9.0f;
-	cubos[1].angulo = 0.0f;
 	cubos[1].corR = 1.0f; cubos[1].corG = 0.0f; cubos[1].corB = 0.0f;
 
 	cubos[2].x = 0.0f;
 	cubos[2].y = -9.0f;
-	cubos[2].angulo = 0.0f;
 	cubos[2].corR = 0.0f; cubos[2].corG = 1.0f; cubos[2].corB = 0.0f;
 
 	cubos[3].x = 0.0f;
 	cubos[3].y = -9.0f;
-	cubos[3].angulo = 0.0f;
+	cubos[3].scale = 1.5f;
 	cubos[3].corR = 0.0f; cubos[3].corG = 0.0f; cubos[3].corB = 1.0f;
 
 	glutDisplayFunc(display);
