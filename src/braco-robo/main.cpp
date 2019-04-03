@@ -16,7 +16,7 @@ public:
 
 	void updateLeft(void) {
 		this->angulo -= 10;
-		//this->y += 1.0f;
+		//this->y += 1.0f;	
 	}
 	
 	void updateRight(void) {
@@ -27,8 +27,9 @@ public:
 	void display(void) {
 		//desenha o cubo
 		glColor3f(this->corR, this->corG, this->corB);
-		glTranslatef(this->x, this->y, 0.0f);
+				
 		glRotatef(this->angulo, 0.0f, 0.0f, 1.0f);
+		glTranslatef(this->x, this->y, 0.0f);
 		glutWireCube(7);
 	}
 };
@@ -76,37 +77,27 @@ void display(void)
 
 void keyboard(unsigned char a, int x, int y)
 {
-	if (a == '') {
-		cubos[1].x += 5;
-	}
-	else if (a == 'q') {
+	if (a == 'q') {
 		if (cubos[1].angulo >= -25) {
 			cubos[1].updateLeft();
-			cubos[2].updateLeft();
-			cubos[3].updateLeft();
 		}
 	}
 	else if (a == 'a') {
 		if (cubos[1].angulo <= 25) {
 			cubos[1].updateRight();
-			cubos[2].updateRight();
-			cubos[3].updateRight();
 		}
 	}
 
 	else if (a == 'w') {
 		if (cubos[2].angulo >= -30) {
 			cubos[2].updateLeft();
-			cubos[3].updateLeft();
 		}
 	}
 	else if (a == 's') {
 		if (cubos[2].angulo <= 30) {
 			cubos[2].updateRight();
-			cubos[3].updateRight();
 		}
 	}
-
 
 	else if (a == 'e') {
 		if (cubos[3].angulo >= -40) {
@@ -118,8 +109,38 @@ void keyboard(unsigned char a, int x, int y)
 			cubos[3].updateRight();
 		}
 	}
+	else if (a == 'z') {
+		cubos[0].x -= 1;
+	}
+	else if (a == 'x') {
+		cubos[0].x += 1;		
+	}
 
 	// Request display update
+	glutPostRedisplay();
+}
+
+
+
+void especial(int key, int x, int y)
+{
+	switch (key)
+	{
+	case GLUT_KEY_UP:
+		cubos[0].y -= 1;
+		break;
+		break;
+	case GLUT_KEY_DOWN:
+		cubos[0].y += 1;
+		break;
+	case GLUT_KEY_LEFT:
+		cubos[0].x -= 1;
+		break;
+	case GLUT_KEY_RIGHT:
+		cubos[0].x+=1;
+		break;
+	}
+
 	glutPostRedisplay();
 }
 
@@ -145,22 +166,23 @@ int main()
 	cubos[0].corR = 0.0f; cubos[0].corG = 0.0f; cubos[0].corB = 0.0f;
 
 	cubos[1].x = 0.0f;
-	cubos[1].y = -7.0f;
+	cubos[1].y = -9.0f;
 	cubos[1].angulo = 0.0f;
 	cubos[1].corR = 1.0f; cubos[1].corG = 0.0f; cubos[1].corB = 0.0f;
 
 	cubos[2].x = 0.0f;
-	cubos[2].y = -7.0f;
+	cubos[2].y = -9.0f;
 	cubos[2].angulo = 0.0f;
 	cubos[2].corR = 0.0f; cubos[2].corG = 1.0f; cubos[2].corB = 0.0f;
 
 	cubos[3].x = 0.0f;
-	cubos[3].y = -7.0f;
+	cubos[3].y = -9.0f;
 	cubos[3].angulo = 0.0f;
 	cubos[3].corR = 0.0f; cubos[3].corG = 0.0f; cubos[3].corB = 1.0f;
 
 	glutDisplayFunc(display);
 	glutKeyboardFunc(keyboard);
+	glutSpecialFunc(especial);
 
 	glutMainLoop();
 	return 0;
