@@ -9,29 +9,46 @@
 
 class Cubo {
 public:
+	
 
 	double x, y, z;
 	double angulo;
 	double corR, corG, corB;
+	int rY;
+	float rYvalue;
 
 	void updateLeft(void) {
-		this->angulo -= 10;
-		//this->y += 1.0f;	
+		this->angulo -= 10;	
 	}
 	
 	void updateRight(void) {
 		this->angulo += 10;
-		//this->y += 1.0f;
+	}
+
+	void rotateLeftY(void) {
+		this->rY = 1;
+		this->rYvalue -= 3.0;
+	}
+
+	void rotateRightY(void) {
+		this->rY = 1;
+		this->rYvalue += 3.0;
 	}
 
 	void display(void) {
 		//desenha o cubo
 		glColor3f(this->corR, this->corG, this->corB);
-				
 		glRotatef(this->angulo, 0.0f, 0.0f, 1.0f);
 		glTranslatef(this->x, this->y, 0.0f);
+
+		if (this->rY = 1) {
+			glRotatef(this->rYvalue, 0.0f, 1.0f, 0.0f);
+			this->rY = 0;
+		}
+
 		glutWireCube(7);
 	}
+
 };
 
 Cubo cubos[4];
@@ -110,10 +127,10 @@ void keyboard(unsigned char a, int x, int y)
 		}
 	}
 	else if (a == 'z') {
-		cubos[0].x -= 1;
+		cubos[0].x -= 1.0f;
 	}
 	else if (a == 'x') {
-		cubos[0].x += 1;		
+		cubos[0].x += 1.0f;		
 	}
 
 	// Request display update
@@ -127,17 +144,14 @@ void especial(int key, int x, int y)
 	switch (key)
 	{
 	case GLUT_KEY_UP:
-		cubos[0].y -= 1;
-		break;
 		break;
 	case GLUT_KEY_DOWN:
-		cubos[0].y += 1;
 		break;
 	case GLUT_KEY_LEFT:
-		cubos[0].x -= 1;
+		cubos[0].rotateLeftY();
 		break;
 	case GLUT_KEY_RIGHT:
-		cubos[0].x+=1;
+		cubos[0].rotateRightY();
 		break;
 	}
 
