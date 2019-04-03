@@ -27,11 +27,9 @@ public:
 	void display(void) {
 		//desenha o cubo
 		glColor3f(this->corR, this->corG, this->corB);
-		glPushMatrix();
 		glTranslatef(this->x, this->y, 0.0f);
 		glRotatef(this->angulo, 0.0f, 0.0f, 1.0f);
 		glutWireCube(7);
-		glPopMatrix();
 	}
 };
 
@@ -78,7 +76,7 @@ void display(void)
 
 void keyboard(unsigned char a, int x, int y)
 {
-	if (a == 1) {
+	if (a == '') {
 		cubos[1].x += 5;
 	}
 	else if (a == 'q') {
@@ -97,14 +95,26 @@ void keyboard(unsigned char a, int x, int y)
 	}
 
 	else if (a == 'w') {
-		if (cubos[2].angulo >= -45) {
+		if (cubos[2].angulo >= -30) {
 			cubos[2].updateLeft();
 			cubos[3].updateLeft();
 		}
 	}
 	else if (a == 's') {
-		if (cubos[2].angulo <= 45) {
+		if (cubos[2].angulo <= 30) {
 			cubos[2].updateRight();
+			cubos[3].updateRight();
+		}
+	}
+
+
+	else if (a == 'e') {
+		if (cubos[3].angulo >= -40) {
+			cubos[3].updateLeft();
+		}
+	}
+	else if (a == 'd') {
+		if (cubos[3].angulo <= 40) {
 			cubos[3].updateRight();
 		}
 	}
@@ -135,17 +145,17 @@ int main()
 	cubos[0].corR = 0.0f; cubos[0].corG = 0.0f; cubos[0].corB = 0.0f;
 
 	cubos[1].x = 0.0f;
-	cubos[1].y = -17.0f;
+	cubos[1].y = -7.0f;
 	cubos[1].angulo = 0.0f;
 	cubos[1].corR = 1.0f; cubos[1].corG = 0.0f; cubos[1].corB = 0.0f;
 
 	cubos[2].x = 0.0f;
-	cubos[2].y = -24.0f;
+	cubos[2].y = -7.0f;
 	cubos[2].angulo = 0.0f;
 	cubos[2].corR = 0.0f; cubos[2].corG = 1.0f; cubos[2].corB = 0.0f;
 
 	cubos[3].x = 0.0f;
-	cubos[3].y = -31.0f;
+	cubos[3].y = -7.0f;
 	cubos[3].angulo = 0.0f;
 	cubos[3].corR = 0.0f; cubos[3].corG = 0.0f; cubos[3].corB = 1.0f;
 
