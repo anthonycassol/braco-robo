@@ -56,7 +56,6 @@ public:
 
 		glutWireCube(7);
 	}
-
 };
 
 //instancia 4 cubos
@@ -96,9 +95,24 @@ void display(void)
 	glEnd();
 
 	//desenha os cubos
+	glPushMatrix();
 	for (int i = 0; i <= 3; i++) {
 		cubos[i].display();
 	}
+
+	glColor3f(0.4f, 0.0f, 1.0f);
+	glRotatef(-20.0f, 0.0f, 0.0f, 1.0f);
+	glTranslatef(0.0f, -6.0f, 0.0f);
+	glScalef(0.4f, 1.0f, 1.0f);
+	glutWireCube(4.0f);
+
+	glColor3f(0.4f, 0.0f, 1.0f);
+	glRotatef(20.0f, 0.0f, 0.0f, 1.0f);
+	glTranslatef(0.0f, 0.0f, 0.0f);
+	glScalef(0.4f, 1.0f, 1.0f);
+	glutWireCube(4.0f);
+	
+	glPopMatrix();
 
 	glutSwapBuffers();
 }
@@ -207,7 +221,7 @@ int main()
 
 	//inicia cubo 3
 	cubos[3].x = 0.0f;
-	cubos[3].y = -9.0f;
+	cubos[3].y = -11.0f;
 	//o cubo 3 te escala maior no Y
 	cubos[3].scale = 1.5f;
 	cubos[3].corR = 0.0f; cubos[3].corG = 0.0f; cubos[3].corB = 1.0f;
